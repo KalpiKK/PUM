@@ -10,6 +10,7 @@
     <string name="true_button">Prawda</string>
     <string name="false_button">Fałsz</string>
     <string name="next_button">Następne</string>
+    <string name="back_button">Poprzednie</string>
 
     <string name="correct_toast">Odpowiedź poprawna!</string>
     <string name="incorrect_toast">Odpowiedź błędna!</string>
