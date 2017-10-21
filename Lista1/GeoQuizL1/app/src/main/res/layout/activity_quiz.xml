@@ -60,9 +60,9 @@ This means, in which direction it's contents should align.
         -->
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <!--
         LinearLayout also supports assigning a weight to individual children
@@ -81,18 +81,20 @@ This means, in which direction it's contents should align.
         then it is now declared more important than both the others, so it gets half
         the total remaining space, while the first two share the rest equally.
         -->
+
         <Button
-            android:text="@string/false_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/false_button"
-            android:layout_weight="1" />
-        <Button
-            android:text="@string/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/false_button" />
+
+        <Button
             android:id="@+id/true_button"
-            android:layout_weight="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/true_button" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,22 +102,19 @@ This means, in which direction it's contents should align.
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.14"
-            android:drawableLeft="@drawable/arrow_left"
-            android:text="@string/back_button" />
+            app:srcCompat="@drawable/arrow_left" />
 
-        <Button
+        <ImageButton
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawablePadding="6dp"
-            android:drawableRight="@drawable/arrow_right"
-            android:text="@string/next_button" />
+            android:layout_weight="0.14"
+            app:srcCompat="@drawable/arrow_right" />
 
     </LinearLayout>
 
