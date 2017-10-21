@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class QuizActivity extends AppCompatActivity {
 
 
@@ -20,13 +22,15 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
 
     private Question[] mQuestionsBank = new Question[]{
-            new Question(R.string.question_stolica_polski, true),
-            new Question(R.string.question_stolica_dolnego_slaska, false),
-            new Question(R.string.question_sniezka, true),
-            new Question(R.string.question_wisla, true)
+            new Question(R.string.question_stolica_polski, true, true),
+            new Question(R.string.question_stolica_dolnego_slaska, false, true),
+            new Question(R.string.question_sniezka, true, true),
+            new Question(R.string.question_wisla, true, true)
     };
 
     private int mCurrentIndex = 0;
+    int mScore = 0;
+    ArrayList mDone = new ArrayList();
 
     //    Bundles are generally used for passing data between various Android activities.
     //    It depends on you what type of values you want to pass, but bundles can hold all
@@ -100,13 +104,16 @@ public class QuizActivity extends AppCompatActivity {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
+        boolean addDone = mQuestionsBank[mCurrentIndex].isDoneb();
 
         int toastMessageId = 0;
 
-
         if (userPressedTrue == answerIsTrue) {
+
             toastMessageId = R.string.correct_toast;
+
         } else {
+
             toastMessageId = R.string.incorrect_toast;
         }
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
@@ -114,4 +121,5 @@ public class QuizActivity extends AppCompatActivity {
         toast.show();
 
     }
+
 }

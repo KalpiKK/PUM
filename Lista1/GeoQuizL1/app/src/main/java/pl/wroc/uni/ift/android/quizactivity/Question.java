@@ -7,12 +7,14 @@ package pl.wroc.uni.ift.android.quizactivity;
 public class Question {
 
     private int mTextResId;
-    private boolean mAnswerTrue;
+    private boolean mAnswerTrue;;
+    private boolean mDoneb;
 
-    public Question(int textResId, boolean answerTrue)    {
+    public Question(int textResId, boolean answerTrue, boolean doneb)    {
 
         mTextResId=textResId;
         mAnswerTrue = answerTrue;
+        mDoneb = doneb;
     }
 
     public int getTextResId() {
@@ -29,5 +31,13 @@ public class Question {
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
+    }
+
+    public boolean isDoneb() {
+        return mDoneb;
+    }
+
+    public void setDoneb(boolean doneb) {
+        mDoneb = doneb;
     }
 }

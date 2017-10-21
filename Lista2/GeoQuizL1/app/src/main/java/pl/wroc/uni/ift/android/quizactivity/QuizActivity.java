@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class QuizActivity extends AppCompatActivity {
 
 
@@ -19,13 +21,14 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView mQuestionTextView;
 
-    private Question[] mQuestionsBank = new Question[]{
-            new Question(R.string.question_stolica_polski, true),
-            new Question(R.string.question_stolica_dolnego_slaska, false),
-            new Question(R.string.question_sniezka, true),
-            new Question(R.string.question_wisla, true)
-    };
 
+    private Question[] mQuestionsBank = new Question[]{
+            new Question(R.string.question_stolica_polski, true, true),
+            new Question(R.string.question_stolica_dolnego_slaska, false, true),
+            new Question(R.string.question_sniezka, true, true),
+            new Question(R.string.question_wisla, true, true)
+    };
+    private int[] mDoneAnswer = new int[mQuestionsBank.length];
     private int mCurrentIndex = 0;
 
     //    Bundles are generally used for passing data between various Android activities.
@@ -64,6 +67,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionsBank.length;
+
                 updateQuestion();
             }
         });
@@ -80,6 +84,7 @@ public class QuizActivity extends AppCompatActivity {
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DoneAnswers();
                 if (mCurrentIndex == 0){
                     mCurrentIndex = mQuestionsBank.length;
                 }
@@ -90,12 +95,18 @@ public class QuizActivity extends AppCompatActivity {
         });
 
 
+
         updateQuestion();
     }
 
     private void updateQuestion() {
         int question = mQuestionsBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+        DoneAnswers();
+
+
+
+
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -103,15 +114,32 @@ public class QuizActivity extends AppCompatActivity {
 
         int toastMessageId = 0;
 
-
         if (userPressedTrue == answerIsTrue) {
             toastMessageId = R.string.correct_toast;
+            mDoneAnswer[mCurrentIndex] = 1;
         } else {
             toastMessageId = R.string.incorrect_toast;
+            mDoneAnswer[mCurrentIndex] = 2;
         }
+
+        DoneAnswers();
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 200);
         toast.show();
+    }
+
+    private void DoneAnswers() {
+        for( int x = 0; x < mQuestionsBank.length; x++) {
+                if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2 ){
+                mTrueButton.setEnabled(false);
+                mFalseButton.setEnabled(false);}
+            else {
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                }
+
+        }
+
 
     }
 }
