@@ -8,13 +8,11 @@ public class Question {
 
     private int mTextResId;
     private boolean mAnswerTrue;
-    private boolean mDoneAnswer;
 
-    public Question(int textResId, boolean answerTrue, boolean doneAnswer)    {
+    public Question(int textResId, boolean answerTrue)    {
 
         mTextResId=textResId;
         mAnswerTrue = answerTrue;
-        mDoneAnswer = doneAnswer;
     }
 
     public int getTextResId() {
@@ -33,11 +31,4 @@ public class Question {
         mAnswerTrue = answerTrue;
     }
 
-    public boolean isDoneAnswer() {
-        return mDoneAnswer;
-    }
-
-    public void setDoneAnswer(boolean doneAnswer) {
-        mDoneAnswer = doneAnswer;
-    }
 }

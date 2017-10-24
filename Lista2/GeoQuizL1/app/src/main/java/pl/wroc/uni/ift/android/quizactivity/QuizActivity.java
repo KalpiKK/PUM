@@ -24,10 +24,10 @@ public class QuizActivity extends AppCompatActivity {
 
 
     private Question[] mQuestionsBank = new Question[]{
-            new Question(R.string.question_stolica_polski, true, true),
-            new Question(R.string.question_stolica_dolnego_slaska, false, true),
-            new Question(R.string.question_sniezka, true, true),
-            new Question(R.string.question_wisla, true, true)
+            new Question(R.string.question_stolica_polski, true),
+            new Question(R.string.question_stolica_dolnego_slaska, false),
+            new Question(R.string.question_sniezka, true),
+            new Question(R.string.question_wisla, true)
     };
     private int[] mDoneAnswer = new int[mQuestionsBank.length];
     private int mCurrentIndex = 0;
@@ -40,6 +40,8 @@ public class QuizActivity extends AppCompatActivity {
     //    see: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setTitle(R.string.app_name);
         // inflating view objects
