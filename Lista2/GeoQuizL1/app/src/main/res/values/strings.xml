@@ -13,6 +13,6 @@
     <string name="back_button">Poprzednie</string>
 
     <string name="correct_toast">Odpowiedź poprawna!</string>
-    <string name="incorrect_toast">Odpowiedź błędna!</string>
+    <string name="incorrect_toast">Odpowiedź błędna! </string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class QuizActivity extends AppCompatActivity {
     private int[] mDoneAnswer = new int[mQuestionsBank.length];
     private int mCurrentIndex = 0;
 
+    private int ScoreAll=0;
+    private int Score = 0;
     //    Bundles are generally used for passing data between various Android activities.
     //    It depends on you what type of values you want to pass, but bundles can hold all
     //    types of values and pass them to the new activity.
@@ -90,11 +93,8 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 mCurrentIndex = (mCurrentIndex - 1);
                 updateQuestion();
-
             }
         });
-
-
 
         updateQuestion();
     }
@@ -103,9 +103,6 @@ public class QuizActivity extends AppCompatActivity {
         int question = mQuestionsBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
         DoneAnswers();
-
-
-
 
     }
 
@@ -117,29 +114,44 @@ public class QuizActivity extends AppCompatActivity {
         if (userPressedTrue == answerIsTrue) {
             toastMessageId = R.string.correct_toast;
             mDoneAnswer[mCurrentIndex] = 1;
+            Score = Score + 1;
         } else {
             toastMessageId = R.string.incorrect_toast;
             mDoneAnswer[mCurrentIndex] = 2;
         }
 
         DoneAnswers();
+
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 200);
         toast.show();
+        AllSc();
     }
 
     private void DoneAnswers() {
-        for( int x = 0; x < mQuestionsBank.length; x++) {
-                if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2 ){
+        for (int x = 0; x < mQuestionsBank.length; x++) {
+            if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2) {
                 mTrueButton.setEnabled(false);
-                mFalseButton.setEnabled(false);}
-            else {
-                    mTrueButton.setEnabled(true);
-                    mFalseButton.setEnabled(true);
-                }
-
+                mFalseButton.setEnabled(false);
+            } else {
+                mTrueButton.setEnabled(true);
+                mFalseButton.setEnabled(true);
+            }
+        }
+    }
+    private void AllSc(){
+        int toastMessageId = 0;
+        for (int i = 0; i < mQuestionsBank.length; i++) {
+            if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2) {
+                ScoreAll = ScoreAll + 1;
+            }
         }
 
-
+        if (ScoreAll == 16) {
+            String mystring = String.valueOf(Score) + "/4" +" Skończyleś!";
+            Toast toast = Toast.makeText(this, mystring, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 200);
+            toast.show();
+        }
     }
 }
