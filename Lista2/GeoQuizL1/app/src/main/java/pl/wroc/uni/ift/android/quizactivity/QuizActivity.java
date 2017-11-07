@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
@@ -29,7 +27,7 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_sniezka, true),
             new Question(R.string.question_wisla, true)
     };
-    private int[] mDoneAnswer = new int[mQuestionsBank.length];
+    private int[] mCorrectAnswer = new int[mQuestionsBank.length];
     private int mCurrentIndex = 0;
 
     private int ScoreAll=0;
@@ -115,11 +113,11 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             toastMessageId = R.string.correct_toast;
-            mDoneAnswer[mCurrentIndex] = 1;
+            mCorrectAnswer[mCurrentIndex] = 1;
             Score = Score + 1;
         } else {
             toastMessageId = R.string.incorrect_toast;
-            mDoneAnswer[mCurrentIndex] = 2;
+            mCorrectAnswer[mCurrentIndex] = 2;
         }
 
         DoneAnswers();
@@ -132,7 +130,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private void DoneAnswers() {
         for (int x = 0; x < mQuestionsBank.length; x++) {
-            if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2) {
+            if (mCorrectAnswer[mCurrentIndex] == 1 || mCorrectAnswer[mCurrentIndex] == 2) {
                 mTrueButton.setEnabled(false);
                 mFalseButton.setEnabled(false);
             } else {
@@ -144,7 +142,7 @@ public class QuizActivity extends AppCompatActivity {
     private void AllSc(){
         int toastMessageId = 0;
         for (int i = 0; i < mQuestionsBank.length; i++) {
-            if (mDoneAnswer[mCurrentIndex] == 1 || mDoneAnswer[mCurrentIndex] == 2) {
+            if (mCorrectAnswer[mCurrentIndex] == 1 || mCorrectAnswer[mCurrentIndex] == 2) {
                 ScoreAll = ScoreAll + 1;
             }
         }
