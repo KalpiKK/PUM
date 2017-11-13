@@ -31,6 +31,8 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     TextView mApilevel;
 
+    private int mToken = 3;
+
 
 
     private Question[] mQuestionsBank = new Question[]{
@@ -113,6 +115,7 @@ public class QuizActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        mTrueButton.setEnabled(false);
                         checkAnswer(true);
                     }
                 }
@@ -163,9 +166,10 @@ public class QuizActivity extends AppCompatActivity {
             {
                 boolean answerWasShown = CheatActivity.wasAnswerShown(data);
                 if (answerWasShown) {
-
+                    mToken = mToken - 1;
+                    String mystring = String.valueOf(mToken) + "/3" +" Tokeny!";
                     Toast.makeText(this,
-                            R.string.message_for_cheaters,
+                            mystring,
                             Toast.LENGTH_LONG)
                             .show();
                 }
@@ -187,6 +191,9 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
+        if (mToken == 0) {
+            mCheatButton.setEnabled(true);
+        }
         int question = mQuestionsBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }

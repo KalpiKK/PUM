@@ -31,7 +31,7 @@ public class CheatActivity extends AppCompatActivity {
         mButtonShow = (Button) findViewById(R.id.button_show_answer);
         mTextCheat = (TextView) findViewById(R.id.button_cheat);
         if (savedInstanceState != null) {
-            mCheat = savedInstanceState.getBoolean("chleb");
+            mCheat = savedInstanceState.getBoolean("cheeat");
             if (mCheat) {
 
                 if (mAnswer) {
@@ -60,7 +60,7 @@ public class CheatActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-       savedInstanceState.putBoolean("chleb", mCheat);
+       savedInstanceState.putBoolean("cheeat", mCheat);
     }
 
     public static boolean wasAnswerShown(Intent data)
