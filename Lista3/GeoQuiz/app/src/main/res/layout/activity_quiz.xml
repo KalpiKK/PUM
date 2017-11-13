@@ -44,6 +44,12 @@ This means, in which direction it's contents should align.
     so it's best to be completely unique when possible).
     -->
     <TextView
+        android:id="@+id/APILEVEL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APILEVEL" />
+
+    <TextView
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,4 +122,5 @@ This means, in which direction it's contents should align.
         android:layout_height="wrap_content"
         android:id="@+id/button_cheat"
         android:text="@string/cheat_button_label"/>
+
 </LinearLayout>

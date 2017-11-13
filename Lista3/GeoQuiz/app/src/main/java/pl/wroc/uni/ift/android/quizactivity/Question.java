@@ -12,13 +12,12 @@ public class Question implements Parcelable {
 
     private int mTextResId;
     private boolean mAnswerTrue;
-    private boolean mCheatis;
 
-    public Question(int textResId, boolean answerTrue, boolean cheatis)    {
+    public Question(int textResId, boolean answerTrue)    {
 
         mTextResId=textResId;
         mAnswerTrue = answerTrue;
-        mCheatis = cheatis;
+
     }
 
     // Required methods from Parcelable interface
@@ -88,13 +87,5 @@ public class Question implements Parcelable {
         mAnswerTrue = answerTrue;
     }
 
-
-    public boolean ismCheatis() {
-        return mCheatis;
-    }
-
-    public void setmCheatis(boolean cheatis) {
-        mCheatis = cheatis;
-    }
 
 }

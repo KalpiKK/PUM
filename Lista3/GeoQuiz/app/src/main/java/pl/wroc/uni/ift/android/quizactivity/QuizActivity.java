@@ -1,6 +1,7 @@
 package pl.wroc.uni.ift.android.quizactivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -28,14 +29,15 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView mQuestionTextView;
     private Button mCheatButton;
+    TextView mApilevel;
 
-    private boolean[] mch;
+
 
     private Question[] mQuestionsBank = new Question[]{
-            new Question(R.string.question_stolica_polski, true, false),
-            new Question(R.string.question_stolica_dolnego_slaska, false, false),
-            new Question(R.string.question_sniezka, true, false),
-            new Question(R.string.question_wisla, true, false)
+            new Question(R.string.question_stolica_polski, true),
+            new Question(R.string.question_stolica_dolnego_slaska, false),
+            new Question(R.string.question_sniezka, true),
+            new Question(R.string.question_wisla, true)
     };
 
     private int mCurrentIndex = 0;
@@ -102,10 +104,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionsBank.length;
                 updateQuestion();
-                if (mch[mCurrentIndex] = true){
-                    Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_SHORT).show();
 
-                }
             }
         });
 
@@ -147,7 +146,8 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
-
+        mApilevel = (TextView) findViewById(R.id.APILEVEL);
+        mApilevel.setText(" Android Version : " + Build.VERSION.RELEASE + " and API Level : " + Build.VERSION.SDK);
         updateQuestion();
     }
 
@@ -163,7 +163,7 @@ public class QuizActivity extends AppCompatActivity {
             {
                 boolean answerWasShown = CheatActivity.wasAnswerShown(data);
                 if (answerWasShown) {
-                    mch[mCurrentIndex] = true;
+
                     Toast.makeText(this,
                             R.string.message_for_cheaters,
                             Toast.LENGTH_LONG)
