@@ -24,6 +24,19 @@ This means, in which direction it's contents should align.
         android:padding="24dp"/>
 
 
+    <TextView
+        android:id="@+id/APILEVEL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/score_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="viewEnd" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,4 +81,5 @@ This means, in which direction it's contents should align.
         android:id="@+id/button_cheat"
         android:layout_gravity="bottom|center"
         android:text="@string/cheat_button_label"/>
+
 </FrameLayout>

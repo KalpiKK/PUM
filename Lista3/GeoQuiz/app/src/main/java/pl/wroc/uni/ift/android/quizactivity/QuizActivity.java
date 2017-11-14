@@ -30,10 +30,9 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private Button mCheatButton;
     TextView mApilevel;
-
+    TextView mScoreview;
+    private int mScore = 0;
     private int mToken = 3;
-
-
 
     private Question[] mQuestionsBank = new Question[]{
             new Question(R.string.question_stolica_polski, true),
@@ -41,7 +40,7 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_sniezka, true),
             new Question(R.string.question_wisla, true)
     };
-
+    private int[] mCorrectAnswer = new int[mQuestionsBank.length];
     private int mCurrentIndex = 0;
 
     //    Bundles are generally used for passing data between various Android activities.
@@ -59,9 +58,9 @@ public class QuizActivity extends AppCompatActivity {
 
         // check for saved data
         if (savedInstanceState != null) {
-
-
-
+            mScore = savedInstanceState.getInt("score");
+            mToken = savedInstanceState.getInt("token");
+            mCorrectAnswer = savedInstanceState.getIntArray("correct");
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
             Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
 
@@ -151,6 +150,8 @@ public class QuizActivity extends AppCompatActivity {
         });
         mApilevel = (TextView) findViewById(R.id.APILEVEL);
         mApilevel.setText(" Android Version : " + Build.VERSION.RELEASE + " and API Level : " + Build.VERSION.SDK);
+        mScoreview = (TextView) findViewById(R.id.score_view);
+        mScoreview.setText(" Score : " + mScore);
         updateQuestion();
     }
 
@@ -167,6 +168,9 @@ public class QuizActivity extends AppCompatActivity {
                 boolean answerWasShown = CheatActivity.wasAnswerShown(data);
                 if (answerWasShown) {
                     mToken = mToken - 1;
+                    if (mToken == 0) {
+                        mCheatButton.setEnabled(false);
+                    }
                     String mystring = String.valueOf(mToken) + "/3" +" Tokeny!";
                     Toast.makeText(this,
                             mystring,
@@ -179,6 +183,9 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("token",mToken);
+        savedInstanceState.putInt("score", mScore);
+        savedInstanceState.putIntArray("correct", mCorrectAnswer);
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, String.format("onSaveInstanceState: current index %d ", mCurrentIndex) );
 
@@ -192,10 +199,11 @@ public class QuizActivity extends AppCompatActivity {
 
     private void updateQuestion() {
         if (mToken == 0) {
-            mCheatButton.setEnabled(true);
+            mCheatButton.setEnabled(false);
         }
         int question = mQuestionsBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+        DoneAnswers();
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -205,10 +213,25 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             toastMessageId = R.string.correct_toast;
+            mCorrectAnswer[mCurrentIndex] = 1;
+            mScore = mScore + 1;
         } else {
             toastMessageId = R.string.incorrect_toast;
+            mCorrectAnswer[mCurrentIndex] = 2;
         }
-
+        DoneAnswers();
+        mScoreview.setText(" Score : " + mScore);
         Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT).show();
+    }
+    private void DoneAnswers() {
+        for (int x = 0; x < mQuestionsBank.length; x++) {
+            if (mCorrectAnswer[mCurrentIndex] == 1 || mCorrectAnswer[mCurrentIndex] == 2) {
+                mTrueButton.setEnabled(false);
+                mFalseButton.setEnabled(false);
+            } else {
+                mTrueButton.setEnabled(true);
+                mFalseButton.setEnabled(true);
+            }
+        }
     }
 }
